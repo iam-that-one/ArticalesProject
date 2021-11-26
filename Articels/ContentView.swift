@@ -15,7 +15,7 @@ struct ContentView: View {
     @State var showImagePicker = false
     @State var addTxtffield = ""
     @State var selected = "Sport"
-    @State var categories = ["Sport","Comedy","Politcs"]
+    @State var categories = ["Sport","Comedyy","Politcs"]
     @State var info = ""
     @State var showSheet = false
     @Environment(\.managedObjectContext) private var viewContext
@@ -28,7 +28,7 @@ struct ContentView: View {
                     }, label: {
                         Image(systemName: "plus")
                     }
-                                                        ))
+                    ))
                     .navigationBarTitle(Text("Aricles"),displayMode: .large)
                     .sheet(isPresented: $showSheet) {
                         ZStack{
@@ -124,7 +124,6 @@ struct ContentView: View {
             }
             NavigationView{
                 Comedy()
-                  
                     .navigationBarTitle(Text("Aricles"),displayMode: .large)
             }
             .tabItem {
