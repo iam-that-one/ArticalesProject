@@ -92,8 +92,10 @@ struct ContentView: View {
                                 }.pickerStyle(.wheel)
                                 Button {
                                     let newArtical = Article(context: viewContext)
+                                    newArtical.id = UUID()
                                     newArtical.title = addTxtffield
                                     newArtical.info = info
+                                    newArtical.isBooked = false
                                     newArtical.categoery = selected
                                     newArtical.creationDate = Date()
                                     let articlepickedImage = articleInputImage.jpegData(compressionQuality: 1.0)

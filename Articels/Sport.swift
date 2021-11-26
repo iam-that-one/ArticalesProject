@@ -31,10 +31,7 @@ struct Sport: View {
                                                 }
                                                 HStack{
                                                     Text(article.info ?? "")
-                                                     //   .font(.caption)
-                                                        .font(.system(size: 12))
-                                                        //.minimumScaleFactor(1.1)
-
+                                                        .font(.caption)
                                                     Spacer()
                                                 }
                                             }
@@ -55,8 +52,7 @@ struct Sport: View {
                                             .frame(width: 350, height: 140)
 
                                     }.padding()
-                                ).frame(width: 350, height: 300)
-                               // .frame(width: 350, height:article.info!.count < 100 ? 300 : CGFloat(article.info!.count * 2))
+                            ).frame(width: 350, height: 280)
                                 .shadow(color: .gray, radius: 5, x: 5, y: 5)
                             }
                         }

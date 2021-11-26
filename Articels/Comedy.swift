@@ -8,6 +8,7 @@
 import SwiftUI
 
 struct Comedy: View {
+    
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Article.entity(), sortDescriptors: [NSSortDescriptor(key: "creationDate", ascending: true)] ,animation: .default)
     var articles : FetchedResults<Article>
@@ -16,50 +17,45 @@ struct Comedy: View {
             Color.green.opacity(0.50).ignoresSafeArea()
             ScrollView{
                 ForEach(articles){ article in
-                    if article.categoery == "Comedy"{
+                        if article.categoery == "Comedy"{
                         RoundedRectangle(cornerRadius: 5)
                             .foregroundColor(.green.opacity(0.80))
                             .overlay(
                                 VStack{
-                                    VStack{
-                                        HStack{
-                                            VStack{
-                                                HStack{
-                                                    Text(article.title ?? "")
-                                                        .fontWeight(.bold)
-                                                    Spacer()
-                                                }
-                                                HStack{
-                                                    Text(article.info ?? "")
-                                                        .font(.caption)
-                                                    Spacer()
-                                                }
+                                    HStack{
+                                        VStack{
+                                            HStack{
+                                                Text(article.title ?? "")
+                                                    .fontWeight(.bold)
+                                                Spacer()
                                             }
-                                            Spacer()
-                                            Button {
-                                                delete(article: article)
-                                            } label: {
-                                                Image(systemName: "trash.fill")
+                                            HStack{
+                                                Text(article.info ?? "")
+                                                    .font(.caption)
+                                                Spacer()
                                             }
-                                            
                                         }
                                         Spacer()
-                                        HStack{
-                                            Image(systemName: "clock")
-                                            Text(dateFormatter.string(from: article.creationDate ?? Date()))
-                                            Spacer()
+                                        Button {
+                                            delete(artical: article)
+                                        } label: {
+                                            Image(systemName: "trash.fill")
                                         }
-                                        Image(uiImage: UIImage(data: article.image ?? Data()) ?? UIImage(named: "placeholder") ?? UIImage())                                            .resizable()
-                                            .frame(width: 350, height: 140)
+                                    }
+                                    Spacer()
+                                    HStack{
+                                        Image(systemName: "clock")
+                                        Text(dateFormatter.string(from: article.creationDate ?? Date()))
+                                        Spacer()
+                                    }
+                                    Image(uiImage: UIImage(data: article.image ?? Data()) ?? UIImage(named: "placeholder") ?? UIImage())                                            .resizable()
+                                        .frame(width: 350, height: 140)
 
-                                    }.padding()
-                                    
-                                    
-                                }
-                            ).frame(width: 350, height: 300)
+                                }.padding()
+                        ).frame(width: 350, height: 280)
                             .shadow(color: .gray, radius: 5, x: 5, y: 5)
+                        }
                     }
-                }
             }
         }
     }
@@ -69,8 +65,8 @@ struct Comedy: View {
         formatter.timeZone = TimeZone(secondsFromGMT: 3)
         return formatter
     }()
-    func delete(article : Article){
-        viewContext.delete(article)
+    func delete(artical : Article){
+        viewContext.delete(artical)
         do{
             try viewContext.save()
         }catch{}
