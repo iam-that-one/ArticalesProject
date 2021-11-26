@@ -40,6 +40,7 @@ struct Sport: View {
                                                 delete(artical: article)
                                             } label: {
                                                 Image(systemName: "trash.fill")
+                                                    .foregroundColor(.black)
                                             }
                                         }
                                         Spacer()

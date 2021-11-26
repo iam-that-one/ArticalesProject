@@ -17,7 +17,7 @@ struct Politics: View {
             VStack{
                 ScrollView{
                     ForEach(articles){ article in
-                            if article.categoery == "Comedy"{
+                            if article.categoery == "Politcs"{
                             RoundedRectangle(cornerRadius: 5)
                                 .foregroundColor(.green.opacity(0.80))
                                 .overlay(
@@ -40,6 +40,7 @@ struct Politics: View {
                                                 delete(article: article)
                                             } label: {
                                                 Image(systemName: "trash.fill")
+                                                    .foregroundColor(.black)
                                             }
                                         }
                                         Spacer()
