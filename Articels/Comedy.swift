@@ -23,6 +23,7 @@ struct Comedy: View {
             Color.green.opacity(0.50).ignoresSafeArea()
             ScrollView{
                 ForEach(articles){ article in
+                    VStack{
                         if article.categoery == "Comedy"{
                         RoundedRectangle(cornerRadius: 5)
                             .foregroundColor(.green.opacity(0.80))
@@ -42,17 +43,61 @@ struct Comedy: View {
                                             }
                                         }
                                         Spacer()
+                                        if currentArtical == article.id && showMenu{
+                                        HStack(spacing: 15){
                                         Button {
                                             delete(artical: article)
+                                            showMenu = false
                                         } label: {
                                             Image(systemName: "trash.fill")
                                                 .foregroundColor(.black)
                                         }
+                                            Button {
+                                                showEditBox.toggle()
+                                                toBeUpdateArtical = article
+                                                title = article.title ?? ""
+                                                info = article.info ?? ""
+                                            } label: {
+                                                Image(systemName: "square.and.pencil")
+                                                    .foregroundColor(.black)
+                                            }
+                                            Button {
+                                                makeArticalBooked(article: article)
+                                            } label: {
+                                                Image(systemName: article.isBooked ? "bookmark.fill" : "bookmark")
+                                                    .foregroundColor(.black)
+                                            }
+                                        }
+                                        .padding(2)
+                                        .background(Color.white)
+                                        .cornerRadius(5)
+                                        .animation(.linear,value: 2)
+                                        .transition(.move(edge: .top))
+                                    }
+                                        Button {
+                                            withAnimation{
+                                            showMenu.toggle()
+                                            }
+                                            currentArtical = article.id!
+                                        } label: {
+                                            Image(systemName: showMenu ?"chevron.up" : "chevron.down")
+                                                .padding(5)
+                                                .background(.green)
+                                                .shadow(color: .gray, radius: 5, x: 5, y: 5)
+                                            
+                                        }.offset(y: -20)
+
                                     }
                                     Spacer()
                                     HStack{
                                         Image(systemName: "clock")
                                         Text(dateFormatter.string(from: article.creationDate ?? Date()))
+                                     
+                                        Spacer()
+                                    }
+                                    HStack{
+                                    Text("#comedy")
+                                        .font(.caption)
                                         Spacer()
                                     }
                                     Image(uiImage: UIImage(data: article.image ?? Data()) ?? UIImage(named: "placeholder") ?? UIImage())                                            .resizable()
@@ -62,9 +107,47 @@ struct Comedy: View {
                         ).frame(width: 350, height: 280)
                             .shadow(color: .gray, radius: 5, x: 5, y: 5)
                         }
+                
+                    }.padding(1)
                     }
             }
-        }
+            if showEditBox{
+            Rectangle()
+                .frame(width:300, height: 230)
+                .foregroundColor(Color(.systemGray5))
+                .overlay(
+                    VStack{
+                        TextField("Title",text:$title)
+                            .textFieldStyle(PlainTextFieldStyle())
+                            .padding(5)
+                            .background(Color.white)
+                        TextEditor(text: $info)
+                            
+                        HStack{
+                            Button {
+                                update(article: toBeUpdateArtical)
+                                showMenu = false
+                                showEditBox = false
+                            } label: {
+                                Text("update")
+                                    .padding(5)
+                                    .background(Color.gray)
+                            }
+                            Button {
+                                showEditBox = false
+                                showMenu = false
+
+                            } label: {
+                                Text("cancel")
+                                    .padding(5)
+                                    .background(Color.gray)                                }
+                        }.foregroundColor(.black)
+                    }.padding()
+                )
+            }
+    }
+    
+
     }
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
@@ -77,6 +160,24 @@ struct Comedy: View {
         do{
             try viewContext.save()
         }catch{}
+    }
+  
+    func makeArticalBooked(article: Article){
+        article.isBooked.toggle()
+        do{
+            try viewContext.save()
+        }catch let error{
+            print(error)
+        }
+    }
+    func update(article : Article){
+        article.title = title
+        article.info = info
+        do{
+       try viewContext.save()
+        }catch let error{
+            print(error)
+        }
     }
 }
 
