@@ -17,6 +17,7 @@
 		B8D14155274FAEB400244EBD /* Comedy.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D14154274FAEB400244EBD /* Comedy.swift */; };
 		B8D14157274FAF6E00244EBD /* Politics.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D14156274FAF6E00244EBD /* Politics.swift */; };
 		B8D1415927503CB600244EBD /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D1415827503CB600244EBD /* ViewModel.swift */; };
+		B8D1415B2750AB1100244EBD /* ImagePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = B8D1415A2750AB1100244EBD /* ImagePicker.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -31,6 +32,7 @@
 		B8D14154274FAEB400244EBD /* Comedy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Comedy.swift; sourceTree = "<group>"; };
 		B8D14156274FAF6E00244EBD /* Politics.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Politics.swift; sourceTree = "<group>"; };
 		B8D1415827503CB600244EBD /* ViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
+		B8D1415A2750AB1100244EBD /* ImagePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePicker.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -73,6 +75,7 @@
 				B8D14154274FAEB400244EBD /* Comedy.swift */,
 				B8D14156274FAF6E00244EBD /* Politics.swift */,
 				B8D1415827503CB600244EBD /* ViewModel.swift */,
+				B8D1415A2750AB1100244EBD /* ImagePicker.swift */,
 			);
 			path = Articels;
 			sourceTree = "<group>";
@@ -158,6 +161,7 @@
 				B8D14155274FAEB400244EBD /* Comedy.swift in Sources */,
 				B8D14153274FA87900244EBD /* Sport.swift in Sources */,
 				B8D14142274FA65B00244EBD /* ContentView.swift in Sources */,
+				B8D1415B2750AB1100244EBD /* ImagePicker.swift in Sources */,
 				B8D14140274FA65B00244EBD /* ArticelsApp.swift in Sources */,
 				B8D14157274FAF6E00244EBD /* Politics.swift in Sources */,
 				B8D14151274FA75700244EBD /* CoreDataManager.swift in Sources */,

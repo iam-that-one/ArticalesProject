@@ -48,8 +48,11 @@ struct Sport: View {
                                             Text(dateFormatter.string(from: article.creationDate ?? Date()))
                                             Spacer()
                                         }
+                                        Spacer()
+                                        Image(uiImage: UIImage(data: article.image ?? Data()) ?? UIImage(named: "placeholder") ?? UIImage())                                            .resizable()
+                                            .frame(width: 350, height: 140)
                                     }.padding()
-                            ).frame(width: 350, height: 140)
+                            ).frame(width: 350, height: 280)
                                 .shadow(color: .gray, radius: 5, x: 5, y: 5)
                             }
                         }

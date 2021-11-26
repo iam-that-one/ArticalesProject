@@ -9,7 +9,11 @@ import SwiftUI
 
 struct ContentView: View {
     @StateObject var viewModel = ViewModel()
-
+    @State var sourceType:UIImagePickerController.SourceType = .photoLibrary
+    @State private var articleIimage: Image?
+    @State private var articleInputImage = UIImage()
+    @State var showActionSheet = false
+    @State var showImagePicker = false
     @State var addTxtffield = ""
     @State var selected = "Sport"
     @State var categories = ["Sport","Comedy","Politcs"]
@@ -71,6 +75,50 @@ struct ContentView: View {
                         .overlay(RoundedRectangle(cornerRadius: 5).stroke())
                     TextEditor(text: $info)
                         .overlay(RoundedRectangle(cornerRadius: 5).stroke())
+                    Button(action:{
+                        showActionSheet.toggle()
+                    }){
+                        if articleIimage != nil {
+                            articleIimage!
+                                .resizable()
+                                .frame(width: 300, height: 200, alignment: .center)
+                                .padding()
+                                .background(Color(.systemGray5))
+                                .cornerRadius(5)
+                        }else{
+                            Image(systemName: "photo.artframe")
+                                .resizable()
+                                .frame(width: 300, height: 200, alignment: .center)
+                                .padding()
+                                .background(Color(.systemGray5))
+                                .cornerRadius(5)
+                                .foregroundColor(.gray)
+                        }
+                    }
+                    .actionSheet(isPresented: $showActionSheet) {
+                        ActionSheet(title: Text("Choose Note thumbnail"), message: nil, buttons:
+                                        [
+                                            .default(Text("Camera")){
+                                                showImagePicker.toggle()
+                                                sourceType = .camera
+                                            },
+                                            .default(Text("Photo library"))
+                                            {
+                                                showImagePicker.toggle()
+                                                sourceType = .photoLibrary
+                                                
+                                            },
+                                            .cancel()
+                                        ]
+                        )
+                    }
+                    .sheet(isPresented: $showImagePicker, onDismiss: {
+                        if articleInputImage != UIImage(){
+                            loadImage()
+                        }
+                    }) { ImagePicker(sourceType: sourceType,selectedImage: self.$articleInputImage)
+                    }
+
                     Text("Choose a category")
                     Picker("Categories", selection: $selected){
                         ForEach(categories, id: \.self){ category in
@@ -83,7 +131,8 @@ struct ContentView: View {
                         newArtical.info = info
                         newArtical.categoery = selected
                         newArtical.creationDate = Date()
-                        
+                        let articlepickedImage = articleInputImage.jpegData(compressionQuality: 1.0)
+                        newArtical.image = articlepickedImage
                         do{
                             try viewContext.save()
                         }catch let error{
@@ -102,6 +151,10 @@ struct ContentView: View {
             }
         }
     }
+    func loadImage() {
+        articleIimage = Image(uiImage: articleInputImage)
+    }
+    
 }
 
 struct ContentView_Previews: PreviewProvider {
