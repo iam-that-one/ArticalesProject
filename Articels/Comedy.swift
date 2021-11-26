@@ -10,62 +10,55 @@ import SwiftUI
 struct Comedy: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Article.entity(), sortDescriptors: [NSSortDescriptor(key: "creationDate", ascending: true)] ,animation: .default)
-     var articles : FetchedResults<Article>
+    var articles : FetchedResults<Article>
     var body: some View {
         ZStack{
             Color.green.opacity(0.50).ignoresSafeArea()
             ScrollView{
-                    ForEach(articles){ artical in
-                        if artical.categoery == "Comedy"{
+                ForEach(articles){ article in
+                    if article.categoery == "Comedy"{
                         RoundedRectangle(cornerRadius: 5)
-                                .foregroundColor(.green.opacity(0.80))
-
+                            .foregroundColor(.green.opacity(0.80))
                             .overlay(
-                        VStack{
-                            
                                 VStack{
-                                    HStack{
-                                        VStack{
-                                            HStack{
-                                                Text(artical.title ?? "")
-                                                    .fontWeight(.bold)
-                                                Spacer()
+                                    VStack{
+                                        HStack{
+                                            VStack{
+                                                HStack{
+                                                    Text(article.title ?? "")
+                                                        .fontWeight(.bold)
+                                                    Spacer()
+                                                }
+                                                HStack{
+                                                    Text(article.info ?? "")
+                                                        .font(.caption)
+                                                    Spacer()
+                                                }
                                             }
-                                            HStack{
-                                                Text(artical.info ?? "")
-                                                    .font(.caption)
-                                                Spacer()
+                                            Spacer()
+                                            Button {
+                                                delete(article: article)
+                                            } label: {
+                                                Image(systemName: "trash.fill")
                                             }
+                                            
                                         }
                                         Spacer()
-                                        Button {
-                                            delete(article: artical)
-                                        } label: {
-                                            Image(systemName: "trash.fill")
+                                        HStack{
+                                            Image(systemName: "clock")
+                                            Text(dateFormatter.string(from: article.creationDate ?? Date()))
+                                            Spacer()
                                         }
-                                        
-                                    }
-                                    Spacer()
-                                    HStack{
-                                        Image(systemName: "clock")
-                                        Text(dateFormatter.string(from: artical.creationDate ?? Date()))
-                                        Spacer()
-                                    }
-                                }.padding()
-                            
-                            
-                        }
-                        ).frame(width: 350, height: 140)
+                                    }.padding()
+                                    
+                                    
+                                }
+                            ).frame(width: 350, height: 140)
                             .shadow(color: .gray, radius: 5, x: 5, y: 5)
-                        }
                     }
-                
-                
-                
+                }
             }
-            
         }
-        
     }
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

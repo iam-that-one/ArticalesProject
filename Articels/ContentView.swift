@@ -15,7 +15,7 @@ struct ContentView: View {
     @State var categories = ["Sport","Comedy","Politcs"]
     @State var info = ""
     @State var showSheet = false
-   // @Environment(\.managedObjectContext) private var viewContext
+    @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
         TabView{
             NavigationView{
@@ -78,14 +78,14 @@ struct ContentView: View {
                         }
                     }.pickerStyle(.wheel)
                     Button {
-                        let newArtical = Article(context: viewModel.viewContext)
+                        let newArtical = Article(context: viewContext)
                         newArtical.title = addTxtffield
                         newArtical.info = info
                         newArtical.categoery = selected
                         newArtical.creationDate = Date()
                         
                         do{
-                            try viewModel.viewContext.save()
+                            try viewContext.save()
                         }catch let error{
                             print(error)
                         }

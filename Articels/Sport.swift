@@ -16,8 +16,8 @@ struct Sport: View {
             ZStack{
                 Color.green.opacity(0.50).ignoresSafeArea()
                 ScrollView{
-                    ForEach(articles){ artical in
-                            if artical.categoery == "Sport"{
+                    ForEach(articles){ article in
+                            if article.categoery == "Sport"{
                             RoundedRectangle(cornerRadius: 5)
                                 .foregroundColor(.green.opacity(0.80))
                                 .overlay(
@@ -25,19 +25,19 @@ struct Sport: View {
                                         HStack{
                                             VStack{
                                                 HStack{
-                                                    Text(artical.title ?? "")
+                                                    Text(article.title ?? "")
                                                         .fontWeight(.bold)
                                                     Spacer()
                                                 }
                                                 HStack{
-                                                    Text(artical.info ?? "")
+                                                    Text(article.info ?? "")
                                                         .font(.caption)
                                                     Spacer()
                                                 }
                                             }
                                             Spacer()
                                             Button {
-                                                delete(artical: artical)
+                                                delete(artical: article)
                                             } label: {
                                                 Image(systemName: "trash.fill")
                                             }
@@ -45,11 +45,10 @@ struct Sport: View {
                                         Spacer()
                                         HStack{
                                             Image(systemName: "clock")
-                                            Text(dateFormatter.string(from: artical.creationDate ?? Date()))
+                                            Text(dateFormatter.string(from: article.creationDate ?? Date()))
                                             Spacer()
                                         }
                                     }.padding()
-                                        
                             ).frame(width: 350, height: 140)
                                 .shadow(color: .gray, radius: 5, x: 5, y: 5)
                             }

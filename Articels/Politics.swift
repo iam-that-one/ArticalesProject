@@ -16,8 +16,8 @@ struct Politics: View {
             Color.green.opacity(0.50).ignoresSafeArea()
             VStack{
                 ScrollView{
-                        ForEach(articles){ artical in
-                            if artical.categoery == "Politcs"{
+                        ForEach(articles){ article in
+                            if article.categoery == "Comedy"{
                             RoundedRectangle(cornerRadius: 5)
                                     .foregroundColor(.green.opacity(0.80))
 
@@ -28,19 +28,19 @@ struct Politics: View {
                                         HStack{
                                             VStack{
                                                 HStack{
-                                                    Text(artical.title ?? "")
+                                                    Text(article.title ?? "")
                                                         .fontWeight(.bold)
                                                     Spacer()
                                                 }
                                                 HStack{
-                                                    Text(artical.info ?? "")
+                                                    Text(article.info ?? "")
                                                         .font(.caption)
                                                     Spacer()
                                                 }
                                             }
                                             Spacer()
                                             Button {
-                                                delete(article: artical)
+                                                delete(article: article)
                                             } label: {
                                                 Image(systemName: "trash.fill")
                                             }
@@ -49,7 +49,7 @@ struct Politics: View {
                                         Spacer()
                                         HStack{
                                             Image(systemName: "clock")
-                                            Text(dateFormatter.string(from: artical.creationDate ?? Date()))
+                                            Text(dateFormatter.string(from: article.creationDate ?? Date()))
                                             Spacer()
                                         }
                                     }.padding()
