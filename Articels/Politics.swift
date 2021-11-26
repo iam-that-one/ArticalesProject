@@ -8,6 +8,13 @@
 import SwiftUI
 
 struct Politics: View {
+    @State var title = ""
+    @State var info = ""
+
+    @State var showEditBox = false
+    @State var currentArtical = UUID()
+    @State var toBeUpdateArtical = Article()
+    @State var showMenu = false
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Article.entity(), sortDescriptors: [NSSortDescriptor(key: "creationDate", ascending: true)] ,animation: .default)
     private var articles : FetchedResults<Article>

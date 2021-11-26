@@ -8,7 +8,13 @@
 import SwiftUI
 
 struct Comedy: View {
-    
+    @State var title = ""
+    @State var info = ""
+
+    @State var showEditBox = false
+    @State var currentArtical = UUID()
+    @State var toBeUpdateArtical = Article()
+    @State var showMenu = false
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Article.entity(), sortDescriptors: [NSSortDescriptor(key: "creationDate", ascending: true)] ,animation: .default)
     var articles : FetchedResults<Article>
