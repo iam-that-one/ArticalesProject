@@ -8,12 +8,14 @@
 import SwiftUI
 
 struct ContentView: View {
+    @StateObject var viewModel = ViewModel()
+
     @State var addTxtffield = ""
     @State var selected = "Sport"
     @State var categories = ["Sport","Comedy","Politcs"]
     @State var info = ""
     @State var showSheet = false
-    @Environment(\.managedObjectContext) private var viewContext
+   // @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
         TabView{
             NavigationView{
@@ -76,14 +78,14 @@ struct ContentView: View {
                         }
                     }.pickerStyle(.wheel)
                     Button {
-                        let newArtical = Article(context: viewContext)
+                        let newArtical = Article(context: viewModel.viewContext)
                         newArtical.title = addTxtffield
                         newArtical.info = info
                         newArtical.categoery = selected
                         newArtical.creationDate = Date()
                         
                         do{
-                            try viewContext.save()
+                            try viewModel.viewContext.save()
                         }catch let error{
                             print(error)
                         }
