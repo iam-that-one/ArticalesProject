@@ -23,7 +23,7 @@ struct Comedy: View {
     var body: some View {
     ZStack{
         Color.green.opacity(0.50).ignoresSafeArea()
-        ScrollView{
+        ScrollView(showsIndicators: false){
             ForEach(articles){ article in
                 VStack{
                     if article.categoery == "Comedyy"{

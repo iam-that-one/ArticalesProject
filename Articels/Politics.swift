@@ -21,7 +21,7 @@ struct Politics: View {
     var body: some View {
         ZStack{
             Color.green.opacity(0.50).ignoresSafeArea()
-            ScrollView{
+            ScrollView(showsIndicators: false){
                 ForEach(articles){ article in
                     VStack{
                         if article.categoery == "Politcs"{
@@ -74,7 +74,7 @@ struct Politics: View {
                                         .background(Color.white)
                                         .cornerRadius(5)
                                         .animation(.linear,value: 2)
-                                        .transition(.move(edge: .top))
+                                        .transition(.move(edge: .bottom))
                                     }
                                         Button {
                                             withAnimation{

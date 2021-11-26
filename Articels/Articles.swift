@@ -31,7 +31,7 @@ struct Articles: View {
     var body: some View {
             ZStack{
                 Color.green.opacity(0.50).ignoresSafeArea()
-                ScrollView{
+                ScrollView(showsIndicators: false){
                     ForEach(articles){ article in
                         VStack{
                             if article.categoery == "General"{
@@ -64,7 +64,7 @@ struct Articles: View {
                                                     .foregroundColor(.black)
                                             }
                                                 Button {
-                                                    withAnimation(){
+                                                    withAnimation(.spring()){
                                                     showEditBox.toggle()
                                                     }
                                                     toBeUpdateArtical = article
@@ -130,7 +130,7 @@ struct Articles: View {
                     .frame(width:300, height: 230)
                     .foregroundColor(Color(.systemGray5))
                    // .animation(.linear,value: 2)
-                    .transition(.move(edge: .top))
+                    .transition(.move(edge: .bottom))
                     
 
                     .overlay(
