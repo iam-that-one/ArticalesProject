@@ -84,7 +84,7 @@ struct Comedy: View {
                                         }
                                         currentArtical = article.id!
                                     } label: {
-                                        Image(systemName: showMenu ?"chevron.up" : "chevron.down")
+                                        Image(systemName: "rectangle.and.pencil.and.ellipsis")
                                             .padding(5)
                                             .background(.green)
                                             .shadow(color: .gray, radius: 5, x: 5, y: 5)
@@ -105,14 +105,16 @@ struct Comedy: View {
                                     Spacer()
                                 }
                                 Image(uiImage: UIImage(data: article.image ?? Data()) ?? UIImage(named: "placeholder") ?? UIImage())                                            .resizable()
-                                    .frame(width: 350, height: 140)
+                                    .scaledToFill()
+                                    .frame(width: 330, height: 150)
+                                    .cornerRadius(5)
 
                             }.padding()
                     ).frame(width: 350, height: 280)
                         .shadow(color: .gray, radius: 5, x: 5, y: 5)
                     }
             
-                }.padding(1)
+                }
                 }
         
         }
