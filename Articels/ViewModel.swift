@@ -12,11 +12,10 @@ class ViewModel : ObservableObject{
     @FetchRequest(entity: Article.entity(), sortDescriptors: [NSSortDescriptor(key: "creationDate", ascending: true)] ,animation: .default)
      var articles : FetchedResults<Article>
     
-    init(){
-        for i in articles{
-            self.myArticles.append(i)
-        }
-        }
+    func getData()->[Article]{
+        myArticles = articles.map{$0}
+        return myArticles
+    }
 
     
 }

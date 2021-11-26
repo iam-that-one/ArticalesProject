@@ -10,7 +10,7 @@ import SwiftUI
 struct ContentView: View {
     @State var addTxtffield = ""
     @State var selected = "Sport"
-    @State var catecory = ["Sport","Comedy","Politcs"]
+    @State var categories = ["Sport","Comedy","Politcs"]
     @State var info = ""
     @State var showSheet = false
     @Environment(\.managedObjectContext) private var viewContext
@@ -52,7 +52,7 @@ struct ContentView: View {
                     }, label: {
                         Image(systemName: "plus")
                     }
-                                                        ))
+                    ))
                     .navigationBarTitle(Text("Aricles"),displayMode: .large)
             }
             .tabItem {
@@ -69,10 +69,10 @@ struct ContentView: View {
                         .overlay(RoundedRectangle(cornerRadius: 5).stroke())
                     TextEditor(text: $info)
                         .overlay(RoundedRectangle(cornerRadius: 5).stroke())
-                    Text("Choose a ctegery")
-                    Picker("Cate", selection: $selected){
-                        ForEach(catecory, id: \.self){ cat in
-                            Text(cat)
+                    Text("Choose a category")
+                    Picker("Categories", selection: $selected){
+                        ForEach(categories, id: \.self){ category in
+                            Text(category)
                         }
                     }.pickerStyle(.wheel)
                     Button {
@@ -84,8 +84,8 @@ struct ContentView: View {
                         
                         do{
                             try viewContext.save()
-                        }catch{
-                            
+                        }catch let error{
+                            print(error)
                         }
                         showSheet.toggle()
                     } label: {
@@ -95,7 +95,6 @@ struct ContentView: View {
                             .cornerRadius(10)
                             .foregroundColor(.white)
                     }
-                    
                     Spacer()
                 }.padding()
             }

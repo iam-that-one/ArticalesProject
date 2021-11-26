@@ -49,6 +49,7 @@ struct Sport: View {
                                             Spacer()
                                         }
                                     }.padding()
+                                        
                             ).frame(width: 350, height: 140)
                                 .shadow(color: .gray, radius: 5, x: 5, y: 5)
                             }
