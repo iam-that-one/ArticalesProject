@@ -1,4 +1,13 @@
 //
+//  Articles.swift
+//  Articels
+//
+//  Created by Abdullah Alnutayfi on 26/11/2021.
+//
+
+import SwiftUI
+
+//
 //  Sport.swift
 //  Articels
 //
@@ -7,7 +16,7 @@
 
 import SwiftUI
 import CoreData
-struct Sport: View {
+struct Articles: View {
     @State var title = ""
     @State var info = ""
 
@@ -25,7 +34,8 @@ struct Sport: View {
                 ScrollView{
                     ForEach(articles){ article in
                         VStack{
-                            if article.categoery == "Sport"{
+                            if article.categoery == "General"{
+
                             RoundedRectangle(cornerRadius: 5)
                                 .foregroundColor(.green.opacity(0.80))
                                 .overlay(
@@ -99,7 +109,7 @@ struct Sport: View {
                                             Spacer()
                                         }
                                         HStack{
-                                        Text("#sport")
+                                        Text("#general")
                                             .font(.caption)
                                             Spacer()
                                         }
@@ -109,17 +119,20 @@ struct Sport: View {
                                     }.padding()
                             ).frame(width: 350, height: 280)
                                 .shadow(color: .gray, radius: 5, x: 5, y: 5)
-                            }
-                    
+                            
+                        }
                         }.padding(1)
+                        
                         }
                 }
                 if showEditBox{
                 Rectangle()
                     .frame(width:300, height: 230)
                     .foregroundColor(Color(.systemGray5))
-                    .animation(.linear,value: 2)
+                   // .animation(.linear,value: 2)
                     .transition(.move(edge: .top))
+                    
+
                     .overlay(
                         VStack{
                             TextField("Title",text:$title)
@@ -152,6 +165,7 @@ struct Sport: View {
                                         .background(Color.gray)                                }
                             }.foregroundColor(.black)
                                 .buttonStyle(AnimatedButton())
+
                         }.padding()
                     )
                 }
@@ -189,8 +203,9 @@ struct Sport: View {
     }
 }
 
-struct Sport_Previews: PreviewProvider {
+
+struct Articles_Previews: PreviewProvider {
     static var previews: some View {
-        Sport()
+        Articles()
     }
 }

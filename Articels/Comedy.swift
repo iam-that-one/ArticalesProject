@@ -55,7 +55,9 @@ struct Comedy: View {
                                             .foregroundColor(.black)
                                     }
                                         Button {
+                                            withAnimation(){
                                             showEditBox.toggle()
+                                            }
                                             toBeUpdateArtical = article
                                             title = article.title ?? ""
                                             info = article.info ?? ""
@@ -98,7 +100,7 @@ struct Comedy: View {
                                     Spacer()
                                 }
                                 HStack{
-                                Text("#sport")
+                                Text("#comedy")
                                     .font(.caption)
                                     Spacer()
                                 }
@@ -118,6 +120,8 @@ struct Comedy: View {
         Rectangle()
             .frame(width:300, height: 230)
             .foregroundColor(Color(.systemGray5))
+           // .animation(.linear,value: 2)
+            .transition(.move(edge: .bottom))
             .overlay(
                 VStack{
                     TextField("Title",text:$title)
@@ -129,22 +133,27 @@ struct Comedy: View {
                     HStack{
                         Button {
                             update(article: toBeUpdateArtical)
+                            withAnimation(){
                             showMenu = false
                             showEditBox = false
+                            }
                         } label: {
                             Text("update")
                                 .padding(5)
                                 .background(Color.gray)
                         }
                         Button {
+                            withAnimation(){
                             showEditBox = false
                             showMenu = false
-
+                            }
                         } label: {
                             Text("cancel")
                                 .padding(5)
                                 .background(Color.gray)                                }
                     }.foregroundColor(.black)
+                        .buttonStyle(AnimatedButton())
+
                 }.padding()
             )
         }

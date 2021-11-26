@@ -14,15 +14,15 @@ struct ContentView: View {
     @State var showActionSheet = false
     @State var showImagePicker = false
     @State var addTxtffield = ""
-    @State var selected = "Sport"
-    @State var categories = ["Sport","Comedyy","Politcs"]
+    @State var selected = "General"
+    @State var categories = ["Sport","Comedyy","Politcs","General"]
     @State var info = ""
     @State var showSheet = false
     @Environment(\.managedObjectContext) private var viewContext
     var body: some View {
         TabView{
             NavigationView{
-                Sport()
+                Articles()
                     .navigationBarItems(trailing: Button(action: {
                         showSheet.toggle()
                     }, label: {
@@ -119,6 +119,14 @@ struct ContentView: View {
                     }
             }
             .tabItem {
+                Text("articles")
+                Image(systemName: "note.text")
+            }
+            NavigationView{
+                Sport()
+                    .navigationBarTitle(Text("Aricles"),displayMode: .large)
+            }  .tabItem {
+              
                 Text("sport")
                 Image(systemName: "sportscourt.fill")
             }
