@@ -16,10 +16,14 @@ struct Politics: View {
             Color.green.opacity(0.50).ignoresSafeArea()
             VStack{
                 ScrollView{
-                    VStack{
                         ForEach(articles){ artical in
+                            if artical.categoery == "Politcs"{
+                            RoundedRectangle(cornerRadius: 5)
+                                    .foregroundColor(.green.opacity(0.80))
+
+                                .overlay(
                             VStack{
-                                if artical.categoery == "Politcs"{
+                                
                                     VStack{
                                         HStack{
                                             VStack{
@@ -40,6 +44,7 @@ struct Politics: View {
                                             } label: {
                                                 Image(systemName: "trash.fill")
                                             }
+                                            
                                         }
                                         Spacer()
                                         HStack{
@@ -48,11 +53,16 @@ struct Politics: View {
                                             Spacer()
                                         }
                                     }.padding()
-                                }
+                                
                                 
                             }
+                            ).frame(width: 350, height: 140)
+                                .shadow(color: .gray, radius: 5, x: 5, y: 5)
+                            }
                         }
-                    }
+                    
+                    
+                    
                 }
             }
         }

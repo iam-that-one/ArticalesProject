@@ -8,23 +8,19 @@
 import SwiftUI
 import CoreData
 struct Sport: View {
-    @State var addTxtffield = ""
-    @State var select = "Sport"
-    @State var catecory = ["Sport","Comedy","Politcs"]
-    @State var info = ""
-    @State var showSheet = false
+    @StateObject var viewModel = ViewModel()
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Article.entity(), sortDescriptors: [NSSortDescriptor(key: "creationDate", ascending: true)] ,animation: .default)
     private var articles : FetchedResults<Article>
     var body: some View {
-        NavigationView{
             ZStack{
                 Color.green.opacity(0.50).ignoresSafeArea()
                 ScrollView{
-                    VStack{
-                        ForEach(articles){ artical in
-                            VStack{
-                                if artical.categoery == "Sport"{
+                    ForEach(articles){ artical in
+                            if artical.categoery == "Sport"{
+                            RoundedRectangle(cornerRadius: 5)
+                                .foregroundColor(.green.opacity(0.80))
+                                .overlay(
                                     VStack{
                                         HStack{
                                             VStack{
@@ -45,7 +41,6 @@ struct Sport: View {
                                             } label: {
                                                 Image(systemName: "trash.fill")
                                             }
-                                            
                                         }
                                         Spacer()
                                         HStack{
@@ -54,66 +49,13 @@ struct Sport: View {
                                             Spacer()
                                         }
                                     }.padding()
-                                }
-                                
+                            ).frame(width: 350, height: 140)
+                                .shadow(color: .gray, radius: 5, x: 5, y: 5)
                             }
                         }
-                    }
-                    
-                    
                 }
-                
-                
-                
-                .navigationBarItems(trailing: Button(action: {
-                    showSheet.toggle()
-                }, label: {
-                    Image(systemName: "plus")
-                }
-            ))
-                
-        }.sheet(isPresented: $showSheet) {
-                ZStack{
-                    Color.green.opacity(0.50).ignoresSafeArea()
-                    
-                    VStack{
-                        TextField("Article Title", text: $addTxtffield)
-                            .padding(5)
-                            .overlay(RoundedRectangle(cornerRadius: 5).stroke())
-                        TextEditor(text: $info)
-                            .overlay(RoundedRectangle(cornerRadius: 5).stroke())
-                        Text("Choose a ctegery")
-                        Picker("Cate", selection: $select){
-                            ForEach(catecory, id: \.self){ cat in
-                                Text(cat)
-                            }
-                        }.pickerStyle(.wheel)
-                        Button {
-                            let newArtical = Article(context: viewContext)
-                            newArtical.title = addTxtffield
-                            newArtical.info = info
-                            newArtical.categoery = select
-                            newArtical.creationDate = Date()
-                            
-                            do{
-                                try viewContext.save()
-                            }catch{
-                                
-                            }
-                            showSheet.toggle()
-                        } label: {
-                            Text("Create Artical")
-                                .frame(width: 200, height: 40)
-                                .background(Color.blue)
-                                .cornerRadius(10)
-                                .foregroundColor(.white)
-                        }
-                        
-                        Spacer()
-                    }.padding()
-                }
-            }
         }
+        
     }
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()

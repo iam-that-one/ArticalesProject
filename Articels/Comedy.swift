@@ -10,15 +10,19 @@ import SwiftUI
 struct Comedy: View {
     @Environment(\.managedObjectContext) private var viewContext
     @FetchRequest(entity: Article.entity(), sortDescriptors: [NSSortDescriptor(key: "creationDate", ascending: true)] ,animation: .default)
-    private var articles : FetchedResults<Article>
+     var articles : FetchedResults<Article>
     var body: some View {
         ZStack{
             Color.green.opacity(0.50).ignoresSafeArea()
             ScrollView{
-                VStack{
                     ForEach(articles){ artical in
+                        if artical.categoery == "Comedy"{
+                        RoundedRectangle(cornerRadius: 5)
+                                .foregroundColor(.green.opacity(0.80))
+
+                            .overlay(
                         VStack{
-                            if artical.categoery == "Comedy"{
+                            
                                 VStack{
                                     HStack{
                                         VStack{
@@ -39,6 +43,7 @@ struct Comedy: View {
                                         } label: {
                                             Image(systemName: "trash.fill")
                                         }
+                                        
                                     }
                                     Spacer()
                                     HStack{
@@ -47,11 +52,16 @@ struct Comedy: View {
                                         Spacer()
                                     }
                                 }.padding()
-                            }
+                            
                             
                         }
+                        ).frame(width: 350, height: 140)
+                            .shadow(color: .gray, radius: 5, x: 5, y: 5)
+                        }
                     }
-                }
+                
+                
+                
             }
             
         }
