@@ -165,6 +165,7 @@ struct Comedy: View {
     private var dateFormatter: DateFormatter = {
         let formatter = DateFormatter()
         formatter.dateFormat = "MM/dd/yyyy"
+        formatter.dateStyle = .full
         formatter.timeZone = TimeZone(secondsFromGMT: 3)
         return formatter
     }()
