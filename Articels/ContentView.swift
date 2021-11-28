@@ -29,7 +29,7 @@ struct ContentView: View {
                         Image(systemName: "plus")
                     }
                     ))
-                    .navigationBarTitle(Text("Aricles"),displayMode: .large)
+                    .navigationBarTitle(Text("General"),displayMode: .large)
                     .sheet(isPresented: $showSheet) {
                         ZStack{
                             Color.green.opacity(0.50).ignoresSafeArea()
@@ -119,12 +119,12 @@ struct ContentView: View {
                     }
             }
             .tabItem {
-                Text("articles")
+                Text("general")
                 Image(systemName: "note.text")
             }
             NavigationView{
                 Sport()
-                    .navigationBarTitle(Text("Aricles"),displayMode: .large)
+                    .navigationBarTitle(Text("Sports"),displayMode: .large)
             }  .tabItem {
               
                 Text("sport")
@@ -132,7 +132,7 @@ struct ContentView: View {
             }
             NavigationView{
                 Comedy()
-                    .navigationBarTitle(Text("Aricles"),displayMode: .large)
+                    .navigationBarTitle(Text("Comedy"),displayMode: .large)
             }
             .tabItem {
                 Text("Comedy")
@@ -141,7 +141,7 @@ struct ContentView: View {
             
             NavigationView{
                 Politics()
-                    .navigationBarTitle(Text("Aricles"),displayMode: .large)
+                    .navigationBarTitle(Text("Politics"),displayMode: .large)
             }
             .tabItem {
                 Text("Politics")
